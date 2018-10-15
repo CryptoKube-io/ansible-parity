@@ -1,0 +1,25 @@
+#!/bin/bash
+
+tmuxSession="parity-console"
+tmuxWindow="win"
+
+tmux new-session -s $tmuxSession -n $tmuxWindow -d
+
+# parity in top full-width
+tmux split-window -v
+tmux resize-pane -t $tmuxSession:$tmuxWindow.0 -y 6
+tmux send-keys -t $tmuxSession:$tmuxWindow.0 "journalctl -xfu parity.service" C-m
+
+# htop & iostat on bottom-left
+tmux split-window -h -t $tmuxSession:$tmuxWindow.1
+tmux resize-pane -t $tmuxSession:$tmuxWindow.1 -x 160
+tmux split-window -v -t $tmuxSession:$tmuxWindow.1
+tmux resize-pane -t $tmuxSession:$tmuxWindow.3 -y 8
+tmux send-keys -t $tmuxSession:$tmuxWindow.1 "htop" C-m
+tmux send-keys -t $tmuxSession:$tmuxWindow.3 "iostat -x 1" C-m
+
+# df & shell on bottom-right
+tmux split-window -v -t $tmuxSession:$tmuxWindow.2
+tmux resize-pane -t $tmuxSession:$tmuxWindow.2 -y 12
+tmux send-keys -t $tmuxSession:$tmuxWindow.2 "watch -d df -h" C-m
+tmux attach -t $tmuxSession

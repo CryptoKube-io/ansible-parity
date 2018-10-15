@@ -1,0 +1,41 @@
+#!/bin/bash
+
+USER={{parity_user}}
+GROUP={{parity_group}}
+DIR={{parity_dir}}
+EXEC="{{parity_exec_base}}"
+PW_FILE={{parity_dir}}/password
+PW_LENGTH=64
+
+systemctl start parity
+systemctl stop parity
+
+if [ -f $PW_FILE ]; then
+  echo 'Password file exists. Skipping password generation.'
+else
+  touch $PW_FILE
+  chmod 400 $PW_FILE
+  chown $USER:$GROUP $PW_FILE
+  pwgen -s $PW_LENGTH 1 > $PW_FILE
+fi
+#EXEC="$EXEC --password $PW_FILE"
+#
+#if [ -f $DATADIR/keystore/UTC* ]; then
+#  echo 'Keystore file exists. Skipping account generation.'
+#else
+#  $EXEC account new
+#  chown $USER:$GROUP $DATADIR/keystore/UTC*
+#  chmod 400 $DATADIR/keystore/UTC*
+#  GETH_ACCOUNT=$(ls -1 $DATADIR/keystore/UTC* | awk -F'-' '{print $NF}')
+#  if [ "x${GETH_ACCOUNT}x" == "xx" ]; then
+#    echo "ERROR: Failed to generate parity account"
+#    exit 1
+#  else
+#    echo "export GETH_ACCOUNT=$GETH_ACCOUNT" >> ~/.bashrc
+#    export GETH_ACCOUNT
+#    EXEC="$EXEC --unlock $GETH_ACCOUNT"
+#    sed -i '/ExecStart=.*/c\'"ExecStart=$EXEC" /etc/systemd/system/parity.service
+#    systemctl daemon-reload
+#    systemctl restart parity
+#  fi
+#fi

@@ -1,0 +1,23 @@
+---
+- name: Create group {{parity_group}}
+  group:
+    name: '{{parity_group}}'
+  tags: user
+
+- name: Create user {{parity_user}}
+  user:
+    name: '{{parity_user}}'
+    group: '{{parity_group}}'
+    home: '{{parity_dir}}'
+    create_home: no
+  tags: user
+
+- name: Create directory {{parity_dir}}
+  file:
+    path: '{{parity_dir}}'
+    state: directory
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+    mode: 0700
+  tags: user
+

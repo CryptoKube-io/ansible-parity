@@ -1,0 +1,17 @@
+---
+- name: Create systemd unit file
+  template:
+    src: parity.service.j2
+    dest: /etc/systemd/system/parity.service
+    mode: 0400
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+  tags: systemd
+
+- name: Enable systemd service
+  systemd:
+    name: parity.service
+    state: stopped
+    enabled: true
+    daemon_reload: true
+  tags: systemd

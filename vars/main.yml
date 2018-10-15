@@ -1,0 +1,3 @@
+---
+parity_url: '{{parity_mirror}}/v{{parity_version}}/{{parity_platform}}/parity'
+parity_checksum: '{{parity_checksums[parity_version][parity_platform]}}'

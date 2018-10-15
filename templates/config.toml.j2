@@ -1,0 +1,36 @@
+[parity]
+chain = "{{parity_chain}}"
+mode = "{{parity_mode}}"
+# Blockchain and settings will be stored in /opt/parity.
+base_path = "{{parity_dir}}"
+
+{% if parity_mode == 'light' %}
+# Experimental: run in light client mode. Light clients synchronize a bare minimum of data and fetch necessary data on-demand from the network. Much lower in storage, potentially higher in bandwidth. Has no effect with subcommands.
+light = true
+{% endif %}
+
+[network]
+# Specify a path to a file with peers' enodes to be always connected to.
+reserved_peers = "{{parity_dir}}/reserved-peers.txt"
+
+[rpc]
+# Turn on additional processing threads in all HTTP JSON-RPC servers. Setting this to non-zero value allows parallel execution of cpu-heavy queries.
+processing_threads = 2
+
+[websockets]
+# Allows connecting from Origin 'parity://*'.
+origins = ["parity://*"]
+
+[footprint]
+# Increase performance on SSD.
+db_compaction = "ssd"
+# Prune old state data. Maintains journal overlay - fast but extra 50MB of memory used.
+pruning = "fast"
+# If defined will never use more than {{parity_cache}}MB for all caches. (Overrides other cache settings).
+cache_size = {{parity_cache}}
+
+[misc]
+# Logs will be stored at /opt/parity/parity.log.
+log_file = "{{parity_dir}}/parity.log"
+# Enables colors in logs.
+color = false

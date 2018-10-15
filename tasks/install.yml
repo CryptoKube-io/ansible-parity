@@ -1,0 +1,42 @@
+---
+- name: Install prerequisites
+  apt:
+    name: '{{item}}'
+    update_cache: yes
+  with_items: '{{parity_prerequisites}}'
+  tags: install
+
+- name: Create directory {{parity_dir}}
+  file:
+    path: '{{parity_dir}}'
+    state: directory
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+    mode: 0700
+  tags: [ 'config', 'user' ]
+
+#- name: Install Parity package 
+#  apt:
+#    deb: '{{parity_pkg_deb}}'
+#  tags: install
+
+- name: Download Parity binary
+  get_url:
+    url: '{{parity_url}}'
+    dest: '{{parity_dir}}/parity'
+    checksum: '{{parity_checksum}}'
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+    mode: 0700
+
+- name: Copy parity scripts
+  template:
+    src: '{{item}}.j2'
+    dest: '{{parity_dir}}/{{item}}'
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+    mode: 0500
+  with_items:
+    - parity-init.sh
+    - tmux-console.sh
+

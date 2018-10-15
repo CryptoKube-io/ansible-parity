@@ -1,0 +1,7 @@
+---
+# handlers file for ansible-role-parity
+- name: restart parity
+  systemd:
+    name: parity.service
+    state: restarted
+    daemon_reload: true

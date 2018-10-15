@@ -1,0 +1,32 @@
+---
+parity_version: 2.0.6
+parity_platform: x86_64-unknown-linux-gnu
+parity_mirror: https://releases.parity.io
+
+parity_checksums:
+  '2.0.6':
+    x86_64-unknown-linux-gnu: sha256:65c7f5c2bc8e4e7829d6eae99372f4cfef7149d4353712906ec3bfe039529621
+
+parity_dir: /opt/parity
+parity_user: parity
+parity_group: parity
+
+parity_prerequisites:
+  - build-essential
+  - openssl
+  - libssl-dev
+  - libudev-dev
+
+#parity_pkg_deb: https://d1h4xl4cr1h0mo.cloudfront.net/v{{ parity_version }}/x86_64-unknown-linux-gnu/parity_{{ parity_version }}_ubuntu_amd64.deb
+#parity_deb_sha256: 1ea5eb7994a2207cb9638c9ac470064b
+
+parity_exec_base: "{{ parity_dir }}/parity --config={{ parity_dir }}/config.toml"
+parity_id: ""
+parity_log_file: "{{ parity_dir }}/parity.log"
+parity_rpc_port: 8545
+parity_rpc_address: 127.0.0.1
+parity_ws_port: 8546
+parity_ws_address: 127.0.0.1
+parity_chain: kovan
+parity_mode: active
+parity_cache: 2048

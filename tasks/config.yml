@@ -1,0 +1,12 @@
+---
+- name: Manage Parity config files
+  template:
+    src: '{{item}}.j2'
+    dest: '{{parity_dir}}/{{item}}'
+    owner: '{{parity_user}}'
+    group: '{{parity_group}}'
+    mode: 0400
+  with_items:
+    - config.toml
+    - reserved.txt
+  tags: systemd
