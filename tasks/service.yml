@@ -6,7 +6,6 @@
     mode: 0400
     owner: '{{parity_user}}'
     group: '{{parity_group}}'
-  tags: systemd
 
 - name: Enable systemd service
   systemd:
@@ -14,4 +13,3 @@
     state: stopped
     enabled: true
     daemon_reload: true
-  tags: systemd
