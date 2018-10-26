@@ -7,9 +7,20 @@
     owner: '{{parity_user}}'
     group: '{{parity_group}}'
 
-- name: Enable systemd service
-  systemd:
-    name: parity.service
-    state: stopped
-    enabled: true
-    daemon_reload: true
+  - name: Create systemd unit file
+    template:
+      src: parity.service.j2
+      dest: /etc/systemd/system/{{parity_service}}
+      mode: 0400
+      owner: '{{parity_user}}'
+      group: '{{parity_group}}'
+    notify: restart parity
+  
+  - name: Enable systemd service
+    systemd:
+      name: "{{parity_service}}"
+      enabled: true
+      daemon_reload: true
+
+## BLOCK END: tags
+  tags: service

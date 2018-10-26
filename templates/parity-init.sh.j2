@@ -34,7 +34,7 @@ fi
 #    echo "export GETH_ACCOUNT=$GETH_ACCOUNT" >> ~/.bashrc
 #    export GETH_ACCOUNT
 #    EXEC="$EXEC --unlock $GETH_ACCOUNT"
-#    sed -i '/ExecStart=.*/c\'"ExecStart=$EXEC" /etc/systemd/system/parity.service
+#    sed -i '/ExecStart=.*/c\'"ExecStart=$EXEC" /etc/systemd/system/{{parity_service}}
 #    systemctl daemon-reload
 #    systemctl restart parity
 #  fi

@@ -8,7 +8,7 @@ tmux new-session -s $tmuxSession -n $tmuxWindow -d
 # parity in top full-width
 tmux split-window -v
 tmux resize-pane -t $tmuxSession:$tmuxWindow.0 -y 6
-tmux send-keys -t $tmuxSession:$tmuxWindow.0 "journalctl -xfu parity.service" C-m
+tmux send-keys -t $tmuxSession:$tmuxWindow.0 "journalctl -xfu {{parity_service}}" C-m
 
 # htop & iostat on bottom-left
 tmux split-window -h -t $tmuxSession:$tmuxWindow.1

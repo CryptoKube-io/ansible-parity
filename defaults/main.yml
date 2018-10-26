@@ -22,6 +22,7 @@ parity_prerequisites:
 #parity_pkg_deb: https://d1h4xl4cr1h0mo.cloudfront.net/v{{ parity_version }}/x86_64-unknown-linux-gnu/parity_{{ parity_version }}_ubuntu_amd64.deb
 #parity_deb_sha256: 1ea5eb7994a2207cb9638c9ac470064b
 
+parity_service: "parity.service"
 parity_exec_base: "{{ parity_dir }}/parity --config={{ parity_dir }}/config.toml"
 parity_id: ""
 parity_log_file: "{{ parity_dir }}/parity.log"
