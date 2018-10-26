@@ -11,10 +11,11 @@
       group: '{{parity_group}}'
     notify: restart parity
   
-  - name: Enable systemd service
+  - name: Enable and start systemd service
     systemd:
       name: "{{parity_service}}"
       enabled: true
+      state: started
       daemon_reload: true
 
 ## BLOCK END: tags
