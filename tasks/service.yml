@@ -1,11 +1,6 @@
 ---
-- name: Create systemd unit file
-  template:
-    src: parity.service.j2
-    dest: /etc/systemd/system/parity.service
-    mode: 0400
-    owner: '{{parity_user}}'
-    group: '{{parity_group}}'
+- block:
+## BLOCK BEGIN: tags
 
   - name: Create systemd unit file
     template:

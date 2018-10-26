@@ -1,19 +1,24 @@
 ---
-- name: Manage Parity config file
-  template:
-    src: 'config.toml.j2'
-    dest: '{{parity_dir}}/config.toml'
-    owner: '{{parity_user}}'
-    group: '{{parity_group}}'
-    mode: 0400
-  tags: parity-config
+- block:
+  ## BLOCK BEGIN: tags=config
+  - name: Manage Parity config file
+    template:
+      src: 'config.toml.j2'
+      dest: '{{parity_dir}}/config.toml'
+      owner: '{{parity_user}}'
+      group: '{{parity_group}}'
+      mode: 0400
+    notify: restart parity
+  
+  - name: Manage Parity reserved peers file
+    template:
+      src: 'reserved.txt.j2'
+      dest: '{{parity_dir}}/reserved.txt'
+      owner: '{{parity_user}}'
+      group: '{{parity_group}}'
+      mode: 0400
+    when: parity_reserved_peers_file != ''
+    notify: restart parity
 
-- name: Manage Parity reserved peers file
-  template:
-    src: 'reserved.txt.j2'
-    dest: '{{parity_dir}}/reserved.txt'
-    owner: '{{parity_user}}'
-    group: '{{parity_group}}'
-    mode: 0400
-  when: parity_reserved_peers_file != ''
-  tags: parity-peers
+  ## BLOCK END: tags=config
+  tags: config
