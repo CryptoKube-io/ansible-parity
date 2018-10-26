@@ -15,4 +15,5 @@
     owner: '{{parity_user}}'
     group: '{{parity_group}}'
     mode: 0400
+  when: parity_reserved_peers_file != ''
   tags: parity-peers

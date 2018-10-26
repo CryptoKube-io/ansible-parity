@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 Type=simple
-User={{ parity_user }}
-Group={{ parity_group }}
-ExecStart=/usr/bin/parity --config {{ parity_dir }}/config.toml
+User={{parity_user}}
+Group={{parity_group}}
+ExecStart={{parity_dir}}/parity --config {{parity_dir}}/config.toml
 Restart=on-failure
 # SIGHUP gives parity time to exit cleanly before SIGKILL (default 90s)
 KillSignal=SIGHUP

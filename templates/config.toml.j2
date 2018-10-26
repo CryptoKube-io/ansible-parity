@@ -1,6 +1,7 @@
 [parity]
 chain = "{{parity_chain}}"
 mode = "{{parity_mode}}"
+
 # Blockchain and settings will be stored in /opt/parity.
 base_path = "{{parity_dir}}"
 
@@ -9,9 +10,13 @@ base_path = "{{parity_dir}}"
 light = true
 {% endif %}
 
+
 [network]
+
+{% if parity_reserved_peers_file != '' %}
 # Specify a path to a file with peers' enodes to be always connected to.
-reserved_peers = "{{parity_dir}}/reserved-peers.txt"
+reserved_peers = "{{parity_dir}}/{{parity_reserved_peers_file}}"
+{% endif %}
 
 [rpc]
 # Turn on additional processing threads in all HTTP JSON-RPC servers. Setting this to non-zero value allows parallel execution of cpu-heavy queries.
