@@ -27,8 +27,11 @@ parity_id: ''
 parity_reserved_peers_file: ''
 parity_rpc_port: 8545
 parity_rpc_address: 127.0.0.1
+parity_rpc_allowed_hosts: '["none"]'
 parity_ws_port: 8546
 parity_ws_address: 127.0.0.1
+parity_ws_allowed_hosts: '["none"]'
+parity_ws_origins: '["parity://*"]'
 
 # Valid values for parity_chain:
 #   ethereum, classic, poacore, tobalaba, expanse, musicoin, ellaism, easthub, 

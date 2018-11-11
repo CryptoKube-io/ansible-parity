@@ -21,10 +21,29 @@ reserved_peers = "{{parity_dir}}/{{parity_reserved_peers_file}}"
 [rpc]
 # Turn on additional processing threads in all HTTP JSON-RPC servers. Setting this to non-zero value allows parallel execution of cpu-heavy queries.
 processing_threads = 2
+{% if parity_rpc_allowed_hosts != '' %}
+hosts = {{parity_rpc_allowed_hosts}}
+{% endif %}
+{% if parity_rpc_address != '' %}
+interface = "{{parity_rpc_address}}"
+{% endif %}
+{% if parity_rpc_port != '' %}
+port = {{parity_rpc_port}}
+{% endif %}
 
 [websockets]
-# Allows connecting from Origin 'parity://*'.
-origins = ["parity://*"]
+{% if parity_ws_origins != '' %}
+origins = {{parity_ws_origins}}
+{% endif %}
+{% if parity_ws_address != '' %}
+interface = "{{parity_ws_address}}"
+{% endif %}
+{% if parity_ws_port != '' %}
+port = {{parity_ws_port}}
+{% endif %}
+{% if parity_ws_allowed_hosts != '' %}
+hosts = {{parity_ws_allowed_hosts}}
+{% endif %}
 
 [footprint]
 # Increase performance on SSD.
