@@ -1,7 +1,7 @@
 ---
 parity_version: 2.0.8
 parity_platform: x86_64-unknown-linux-gnu
-parity_mirror: https://releases.parity.io
+parity_mirror: https://releases.parity.io/ethereum
 parity_checksums:
   '2.0.8':
     x86_64-unknown-linux-gnu: sha256:f9f109f81693e790ca2c9771ddaea9ab3286d971b6f7242b627552c18ecd564a
